@@ -309,41 +309,27 @@ paths:
           description: Missing required fields
         "500":
           description: Failed to schedule messages
-  /attachments:
-    post:
-      summary: Upload an attachment
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                promotion_id:
-                  type: integer
-                file_name:
-                  type: string
-                file_path:
-                  type: string
-                file_size:
-                  type: integer
-                file_type:
-                  type: string
-              required:
-                [
-                  "promotion_id",
-                  "file_name",
-                  "file_path",
-                  "file_size",
-                  "file_type",
-                ]
-      responses:
-        "201":
-          description: Attachment uploaded
-        "400":
-          description: Missing required fields
-        "500":
-          description: Failed to upload attachment
+    /attachments:
+      post:
+        summary: Upload an attachment
+        consumes:
+          - multipart/form-data
+        parameters:
+          - in: formData
+            name: file
+            type: file
+            description: The file to upload
+          - in: formData
+            name: promotion_id
+            type: integer
+            description: ID of the associated promotion
+        responses:
+          "201":
+            description: Attachment uploaded
+          "400":
+            description: Missing required fields
+          "500":
+            description: Failed to upload attachment
   /verifications/email:
     post:
       summary: Save email verification

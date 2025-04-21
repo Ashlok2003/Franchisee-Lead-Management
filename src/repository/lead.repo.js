@@ -2,7 +2,7 @@ import db from '../config/database.js';
 
 export const queryDatabase = async (sql, query) => {
     try {
-        const [results] = await db.query(sql, params);
+        const [results] = await db.query(sql, query);
         return results;
     } catch (err) {
         throw new Error('Database query failed');
@@ -77,4 +77,24 @@ export const getLeadCount = async () => {
     const sql = 'SELECT COUNT(*) AS totalLeads FROM leads_database';
     const [result] = await queryDatabase(sql, []);
     return result[0].totalLeads;
+};
+
+export const searchLeads = async (query) => {
+    const searchQuery = `%${query}%`;
+    const [rows] = await pool.query(
+        `SELECT * FROM leads_database 
+         WHERE name_of_lead LIKE ? 
+         OR city LIKE ? 
+         OR state LIKE ? 
+         OR contact_number LIKE ? 
+         OR email_id LIKE ? 
+         OR franchise_developer_name LIKE ?
+         OR status LIKE ?
+         OR leadType LIKE ?
+         OR source LIKE ?
+         OR team_leader_assign LIKE ?
+         OR remark LIKE ?`,
+        Array(11).fill(searchQuery)
+    );
+    return rows;
 };
