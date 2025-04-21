@@ -159,15 +159,6 @@ paths:
   /promotions:
     get:
       summary: Get all promotions
-      parameters:
-        - name: status
-          in: query
-          schema:
-            type: string
-        - name: type
-          in: query
-          schema:
-            type: string
       responses:
         "200":
           description: List of promotions
