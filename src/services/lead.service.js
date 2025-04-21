@@ -4,6 +4,7 @@ import {
     getAllLeads,
     getLeadById,
     getLeadCount,
+    searchLeads,
     updateLead,
 } from '../repository/lead.repo.js';
 
@@ -58,4 +59,12 @@ export const getLeadsCountService = async () => {
     } catch (err) {
         throw new Error('Error fetching lead count');
     }
+};
+
+export const searchLeadsService = async (query) => {
+    if (!query || query.trim() === '') {
+        throw new Error('Search query is required');
+    }
+
+    return await searchLeads(query.trim());
 };

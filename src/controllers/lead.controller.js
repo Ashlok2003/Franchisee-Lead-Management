@@ -5,6 +5,7 @@ import {
     getLeadsService,
     modifyLeadService,
     removeLeadService,
+    searchLeadsService,
 } from '../services/lead.service.js';
 
 export const getLeadsController = async (req, res) => {
@@ -63,5 +64,15 @@ export const getLeadCountController = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message || 'Error fetching lead count' });
+    }
+};
+
+export const searchLeadsController = async (req, res) => {
+    try {
+        const { query } = req.query;
+        const results = await searchLeadsService(query);
+        res.status(200).json({ data: results });
+    } catch (error) {
+        res.status(400).json({ error: error.message || 'Search failed' });
     }
 };
