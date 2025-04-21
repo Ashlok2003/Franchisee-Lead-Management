@@ -1,3 +1,5 @@
+CREATE DATABASE `franchise_leads_management`;
+
 CREATE TABLE `upload_history` (
   `id` int NOT NULL AUTO_INCREMENT,
   `file_name` varchar(255) NOT NULL,
