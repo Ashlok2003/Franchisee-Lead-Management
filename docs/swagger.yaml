@@ -4,7 +4,7 @@ info:
   description: API for managing leads, templates, promotions, messages, attachments, and email verifications
   version: 1.0.0
 servers:
-  - url: http://localhost:3000/api
+  - url: https://franchisee-lead-management-server.onrender.com/api
     description: Franchise Lead Managements Server
 paths:
   /leads:
