@@ -14,7 +14,7 @@ const startServer = () => {
     app.use('/api', routes);
     app.use(errorHandler);
 
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 5000;
     console.log('Server is starting....\n');
     app.listen(PORT, () => {
         console.log(`Worker ${process.pid} started on port ${PORT}`);
