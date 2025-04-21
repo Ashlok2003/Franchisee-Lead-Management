@@ -5,6 +5,9 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY src/ ./src
+COPY docs/ ./docs
+COPY scripts/ ./scripts
+
 
 # Stage 2: Run the backend
 FROM node:18-bullseye
