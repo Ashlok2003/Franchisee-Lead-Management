@@ -95,7 +95,16 @@ const Sidebar = ({ activePage, setActivePage, setActiveTab }) => {
                   <i className="fas fa-chart-bar"></i>
                   <span>Reports & Analytics</span>
                 </button>
-              </div></>
+              </div><div className="nav-item">
+                <button
+                  className={`nav-button ${activePage === "goalset" ? "active" : ""}`}
+                  onClick={() => handleNavClick("goalset")}
+                >
+                  <i className="fas fa-bullseye"></i>
+                  <span>Set Your Goal</span>
+                </button>
+              </div>
+              </>
           )}
         </div>
 
