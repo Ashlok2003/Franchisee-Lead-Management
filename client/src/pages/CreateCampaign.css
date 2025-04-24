@@ -1,0 +1,462 @@
+.create-campaign-container {
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  min-height: 100%;
+  position: relative;
+}
+
+.create-campaign-header {
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.breadcrumb .separator {
+  margin: 0 0.5rem;
+}
+
+.breadcrumb .current {
+  font-weight: 500;
+  color: #333;
+}
+
+.create-campaign-container h1 {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0.5rem 0 1.5rem 0;
+  font-weight: 600;
+}
+
+.campaign-form-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.form-section h2 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.8rem;
+}
+
+.form-section h3 {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.3rem;
+  width: 100%;
+}
+
+.required {
+  color: #ff4d4f;
+  margin-left: 2px;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-with-icon input,
+.input-with-icon select,
+.input-with-icon .date-input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  padding-right: 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #333;
+  background-color: white;
+  height: 38px;
+}
+
+.input-with-icon input::placeholder,
+.input-with-icon select::placeholder {
+  color: #aaa;
+}
+
+.input-with-icon input:focus,
+.input-with-icon select:focus,
+.input-with-icon .date-input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #7c4dff;
+  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.1);
+}
+
+.input-icon {
+  position: absolute;
+  right: 0.8rem;
+  color: #666;
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.form-group.full-width {
+  grid-column: span 2;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.create-button {
+  background-color: #7c4dff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.create-button:hover {
+  background-color: #6a3aff;
+}
+
+.cancel-button {
+  background-color: transparent;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-button:hover {
+  background-color: #f5f5f5;
+}
+
+.campaign-logo {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.2;
+  width: 300px;
+  height: 300px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+}
+
+/* Style the date input to look better across browsers */
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  color: transparent;
+  cursor: pointer;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;.create-campaign-container {
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    min-height: 100%;
+    position: relative;
+  }
+  
+  .create-campaign-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .breadcrumb .separator {
+    margin: 0 0.5rem;
+  }
+  
+  .breadcrumb .current {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .create-campaign-container h1 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0.5rem 0 1.5rem 0;
+    font-weight: 600;
+  }
+  
+  .campaign-form-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .form-section {
+    margin-bottom: 2rem;
+  }
+  
+  .form-section h2 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.8rem;
+  }
+  
+  .form-section h3 {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: #555;
+    margin-right: 1rem;
+    width: 140px; /* Fixed width for all labels */
+    flex-shrink: 0;
+  }
+  
+  .required {
+    color: #ff4d4f;
+    margin-left: 2px;
+  }
+  
+  .input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+  
+  .input-with-icon input,
+  .input-with-icon select {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    padding-right: 2.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #333;
+    background-color: white;
+    height: 38px;
+  }
+  
+  .input-with-icon input::placeholder,
+  .input-with-icon select::placeholder {
+    color: #aaa;
+  }
+  
+  .input-with-icon input:focus,
+  .input-with-icon select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #7c4dff;
+    box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.1);
+  }
+  
+  .input-icon {
+    position: absolute;
+    right: 0.8rem;
+    color: #666;
+    font-size: 1rem;
+    pointer-events: none;
+  }
+  
+  /* Description section - special handling */
+  .description-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .description-group h3 {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 0.9rem;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .create-button {
+    background-color: #7c4dff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .create-button:hover {
+    background-color: #6a3aff;
+  }
+  
+  .cancel-button {
+    background-color: transparent;
+    color: #555;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .cancel-button:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .campaign-logo {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.2;
+    width: 300px;
+    height: 300px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .campaign-form-container {
+      padding: 1rem;
+    }
+    
+    .form-group {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .form-group label {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+    
+    .input-with-icon {
+      width: 100%;
+    }
+    
+    .campaign-logo {
+      display: none;
+    }
+    
+    .form-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .create-button,
+    .cancel-button {
+      width: 100%;
+    }
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .campaign-form-container {
+    padding: 1rem;
+  }
+  
+  .campaign-logo {
+    display: none;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .create-button,
+  .cancel-button {
+    width: 100%;
+  }
+}

@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 24px;
-    background: linear-gradient(180deg, #ffffff, #f5f5f5);
+    background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;

@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import logo from '../assets/logo.png';
-import './Header.css';
-=======
 import "./Header.css"
 import logo from "../assets/logo.png"
->>>>>>> 1e40634a879cab2e393f180cb4e9d92093fc337e
 
 const Header = () => {
   return (
@@ -27,7 +22,3 @@ const Header = () => {
 
 export default Header
 
-<<<<<<< HEAD
-export default Header;
-=======
->>>>>>> 1e40634a879cab2e393f180cb4e9d92093fc337e
