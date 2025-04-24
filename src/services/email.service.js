@@ -2,7 +2,7 @@ import disposable from 'disposable-email';
 import 'dotenv/config.js';
 import { LeadSchema } from '../config/zodSchemas.js';
 import hasMXRecords from '../utils/dnsChecker.js';
-import transporter from '../utils/mailer.js';
+import { transporter } from '../utils/mailer.js';
 
 export const verifyEmails = async (
     leads,
