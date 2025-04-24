@@ -76,3 +76,22 @@ export const getPromotionDetails = async (id) => {
     );
     return { leads: promotionLeads, attachments };
 };
+
+export const getLeadsForPromotion = async (promotionId) => {
+    const [rows] = await pool.execute(
+        'SELECT ld.* FROM leads_database ld JOIN promotion_leads pl ON ld.id = pl.lead_id WHERE pl.promotion_id = ?',
+        [promotionId]
+    );
+    return rows;
+};
+
+export const updateLeadStatus = async (promotionId, leadId, status, sentAt) => {
+    await pool.execute(
+        'UPDATE promotion_leads SET status = ?, sent_at = ? WHERE promotion_id = ? AND lead_id = ?',
+        [status, sentAt, promotionId, leadId]
+    );
+};
+
+export const updatePromotionStatus = async (id, status) => {
+    await pool.execute('UPDATE promotions SET status = ? WHERE id = ?', [status, id]);
+};

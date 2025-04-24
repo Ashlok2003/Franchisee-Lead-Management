@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 24px;
-    background-color: white;
+    background: linear-gradient(180deg, #ffffff, #f5f5f5);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;
@@ -19,12 +19,18 @@
     width: 40px;
     height: 40px;
     margin-right: 12px;
+    transition: transform 0.2s;
+}
+
+.logo:hover {
+    transform: scale(1.05);
 }
 
 .logo-container h1 {
     font-size: 18px;
     font-weight: 600;
-    color: #333;
+    color: white;
+    margin-left: 10px;
 }
 
 .header-actions {
@@ -39,6 +45,11 @@
     color: #666;
     cursor: pointer;
     margin-right: 16px;
+    transition: color 0.2s;
+}
+
+.help-btn:hover {
+    color: #333;
 }
 
 .user-profile {
@@ -52,4 +63,26 @@
     border-radius: 50%;
     background-color: #e0e0e0;
     cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 10px 16px;
+    }
+    .logo-container h1 {
+        font-size: 16px;
+    }
+    .logo {
+        width: 32px;
+        height: 32px;
+    }
+    .help-btn {
+        font-size: 18px;
+        margin-right: 12px;
+    }
+    .avatar {
+        width: 32px;
+        height: 32px;
+    }
 }

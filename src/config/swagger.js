@@ -7,7 +7,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const setupSwagger = (app) => {
-    const swaggerDocument = YAML.load(path.join(__dirname, '../../docs/swagger.yaml'));
+    const swaggerFile =
+        process.env.NODE_ENV === 'production' ? 'swagger.yaml' : 'swagger.local.yaml';
+
+    const swaggerDocument = YAML.load(path.join(__dirname, `../../docs/${swaggerFile}`));
+
     app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 };
 

@@ -1,8 +1,10 @@
+import { getPromotionStatus } from '../repository/message.repo.js';
 import {
     addLeadsToPromotionService,
     createPromotionService,
     getAllPromotionsService,
     getPromotionByIdService,
+    sendPromotion,
 } from '../services/promotion.service.js';
 
 export const getPromotionsController = async (req, res, next) => {
@@ -42,5 +44,25 @@ export const addLeadsToPromotionController = async (req, res, next) => {
         res.status(201).json({ message: 'Leads added to promotion successfully', results });
     } catch (error) {
         next(error);
+    }
+};
+
+export const sendPromotionNowController = async (req, res) => {
+    const { id } = req.params;
+    try {
+        await sendPromotion(id);
+        res.json({ message: 'Promotion sent successfully' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const getPromotionStatusController = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const status = await getPromotionStatus(id);
+        res.json(status);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 };

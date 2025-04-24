@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Dashboard.css';
 
 const Dashboard = ({ setActivePage }) => {
   const handleCardClick = (page) => {
-    setActivePage(page)
-  }
+    setActivePage(page);
+  };
 
   return (
     <div className="dashboard-container">
-      
-
       <div className="main-content">
         <section className="content">
           <h2 className="section-title">Lead Summary</h2>
           <div className="summary-cards">
             <div className="summary-card">
               <div className="card-icon new">
-                <span>+</span>
+                <i className="fas fa-user-plus"></i>
               </div>
               <div className="card-details">
                 <span className="card-label">NEW</span>
@@ -28,7 +26,7 @@ const Dashboard = ({ setActivePage }) => {
 
             <div className="summary-card">
               <div className="card-icon existing">
-                <span>+</span>
+                <i className="fas fa-users"></i>
               </div>
               <div className="card-details">
                 <span className="card-label">EXISTING</span>
@@ -40,7 +38,7 @@ const Dashboard = ({ setActivePage }) => {
 
             <div className="summary-card">
               <div className="card-icon prospects">
-                <span>+</span>
+                <i className="fas fa-search"></i>
               </div>
               <div className="card-details">
                 <span className="card-label">PROSPECTS</span>
@@ -52,7 +50,7 @@ const Dashboard = ({ setActivePage }) => {
 
             <div className="summary-card">
               <div className="card-icon pending">
-                <span>+</span>
+                <i className="fas fa-clock"></i>
               </div>
               <div className="card-details">
                 <span className="card-label">PENDING</span>
@@ -62,69 +60,69 @@ const Dashboard = ({ setActivePage }) => {
               <button className="card-action purple">Action</button>
             </div>
           </div>
+          <hr className="section-divider" />
 
           <div className="quick-actions">
             <h2 className="section-title">Quick Actions</h2>
             <div className="action-buttons">
-            <button className="action-button purple" onClick={() => setActivePage("upload-leads")}>
-          <i className="fas fa-upload"></i>
-          Upload Leads
-        </button>
-        <button className="action-button purple">
-          <i className="fas fa-bullhorn"></i>
-          Start Campaign
-        </button>
-        <button className="action-button purple">
-          <i className="fas fa-chart-bar"></i>
-          View Reports
-        </button>
+              <button className="action-button purple" onClick={() => setActivePage("upload-leads")}>
+                <i className="fas fa-upload"></i> Upload Leads
+              </button>
+              <button className="action-button purple">
+                <i className="fas fa-bullhorn"></i> Start Campaign
+              </button>
+              <button className="action-button purple">
+                <i className="fas fa-chart-bar"></i> View Reports
+              </button>
             </div>
           </div>
+          <hr className="section-divider" />
 
           <h2 className="section-title">Lead Management</h2>
           <div className="lead-management-cards">
-            <div className="lead-card"onClick={() => handleCardClick("upload-leads")}>
+            <div className="lead-card" onClick={() => handleCardClick("upload-leads")}>
               <div className="lead-card-icon">
-              <i className="fas fa-upload"></i>
+                <i className="fas fa-upload"></i>
               </div>
               <h3 className="lead-card-title">Upload Leads</h3>
               <p className="lead-card-description">Import CSV/XLSX files</p>
               <button className="lead-card-action purple">Upload</button>
             </div>
 
-            <div className="lead-card"onClick={() => handleCardClick("data-cleaning")}>
+            <div className="lead-card" onClick={() => handleCardClick("data-cleaning")}>
               <div className="lead-card-icon">
-              <i className="fas fa-broom"></i>
+                <i className="fas fa-broom"></i>
               </div>
               <h3 className="lead-card-title">Data Cleaning</h3>
-              <p className="lead-card-description"></p>
+              <p className="lead-card-description">Clean and organize data</p>
               <button className="lead-card-action purple">Clean Data</button>
             </div>
 
             <div className="lead-card">
               <div className="lead-card-icon">
-                <span>+</span>
+                <i className="fas fa-tags"></i>
               </div>
               <h3 className="lead-card-title">Categorize</h3>
               <p className="lead-card-description">Organize by lead type</p>
               <button className="lead-card-action purple">Categorize</button>
             </div>
 
-            <div className="lead-card"onClick={() => handleCardClick("filter")}>
+            <div className="lead-card" onClick={() => handleCardClick("filter")}>
               <div className="lead-card-icon">
-              <i className="fas fa-filter"></i>
+                <i className="fas fa-filter"></i>
               </div>
               <h3 className="lead-card-title">Filter Leads</h3>
               <p className="lead-card-description">Search by status/interest</p>
               <button className="lead-card-action purple">Filter</button>
             </div>
           </div>
+          <hr className="section-divider" />
 
           <h2 className="section-title">Lead Promotion Tools</h2>
           <div className="promotion-cards">
             <div className="promotion-card">
               <div className="promotion-card-icon whatsapp">
-                <span>W</span>
+                <i className="fab fa-whatsapp"></i>
               </div>
               <h3 className="promotion-card-title">WhatsApp</h3>
               <p className="promotion-card-description">Send bulk messages</p>
@@ -133,7 +131,7 @@ const Dashboard = ({ setActivePage }) => {
 
             <div className="promotion-card">
               <div className="promotion-card-icon call">
-                <span>C</span>
+                <i className="fas fa-phone"></i>
               </div>
               <h3 className="promotion-card-title">Call Scheduling</h3>
               <p className="promotion-card-description">Auto dialer setup</p>
@@ -142,7 +140,7 @@ const Dashboard = ({ setActivePage }) => {
 
             <div className="promotion-card">
               <div className="promotion-card-icon reminder">
-                <span>R</span>
+                <i className="fas fa-bell"></i>
               </div>
               <h3 className="promotion-card-title">Reminders</h3>
               <p className="promotion-card-description">Set follow-up alerts</p>
@@ -151,17 +149,27 @@ const Dashboard = ({ setActivePage }) => {
 
             <div className="promotion-card">
               <div className="promotion-card-icon status">
-                <span>S</span>
+                <i className="fas fa-tasks"></i>
               </div>
               <h3 className="promotion-card-title">Status Update</h3>
               <p className="promotion-card-description">Track lead progress</p>
               <button className="promotion-card-action purple">Update</button>
             </div>
           </div>
+          <hr className="section-divider" />
 
           <h2 className="section-title">Pending Follow-ups</h2>
           <div className="follow-ups-table">
             <table>
+              <thead>
+                <tr>
+                  <th>Lead</th>
+                  <th>Interest</th>
+                  <th>Channel</th>
+                  <th>Follow-up Time</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
               <tbody>
                 <tr>
                   <td><span className="user-icon">👤</span> Rahul Sharma</td>
@@ -206,12 +214,13 @@ const Dashboard = ({ setActivePage }) => {
               </tbody>
             </table>
           </div>
+          <hr className="section-divider" />
 
           <h2 className="section-title">Analytics Overview</h2>
           <div className="analytics-cards">
             <div className="analytics-card">
               <div className="analytics-card-icon">
-                <span>📈</span>
+                <i className="fas fa-chart-line"></i>
               </div>
               <h3 className="analytics-card-title">Conversion Metrics</h3>
               <p className="analytics-card-description">Track lead performance</p>
@@ -220,7 +229,7 @@ const Dashboard = ({ setActivePage }) => {
 
             <div className="analytics-card">
               <div className="analytics-card-icon">
-                <span>🏢</span>
+                <i className="fas fa-users"></i>
               </div>
               <h3 className="analytics-card-title">Franchisee Tracking</h3>
               <p className="analytics-card-description">Performance by team</p>
@@ -229,7 +238,7 @@ const Dashboard = ({ setActivePage }) => {
 
             <div className="analytics-card">
               <div className="analytics-card-icon">
-                <span>📊</span>
+                <i className="fas fa-file-export"></i>
               </div>
               <h3 className="analytics-card-title">Export Reports</h3>
               <p className="analytics-card-description">CSV, PDF, Excel formats</p>

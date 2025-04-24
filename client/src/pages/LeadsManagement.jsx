@@ -1,10 +1,8 @@
-"use client"
-
-import { useState, useEffect } from "react";
 import axios from "axios";
-import "./LeadsManagement.css";
+import { useEffect, useState } from "react";
 import DataCleaning from "./DataCleaning"; // Import your DataCleaning component
 import Filter from "./Filter"; // Import your Filter component
+import "./LeadsManagement.css";
 
 const API_URL = "http://localhost:5000/api";
 
@@ -27,57 +25,57 @@ const LeadCard = ({ lead, onClose, onLeadUpdate }) => {
     setIsEditing(false);
   };
 
- // Replace the handleSaveClick function in the LeadCard component with this:
-const handleSaveClick = async () => {
-  try {
-    // Log what we're trying to update so we can debug
-    console.log("Updating lead with ID:", lead.id);
-    console.log("Update data:", formData);
-    
-    // Make sure we're using the correct endpoint format
-    const response = await axios({
-      method: 'PUT',
-      url: `${API_URL}/leads/${lead.id}`,
-      data: formData,
-      headers: {
-        'Content-Type': 'application/json'
+  // Replace the handleSaveClick function in the LeadCard component with this:
+  const handleSaveClick = async () => {
+    try {
+      // Log what we're trying to update so we can debug
+      console.log("Updating lead with ID:", lead.id);
+      console.log("Update data:", formData);
+
+      // Make sure we're using the correct endpoint format
+      const response = await axios({
+        method: 'PUT',
+        url: `${API_URL}/leads/${lead.id}`,
+        data: formData,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log("Update response:", response.data);
+
+      // Check if the response was successful
+      if (response.status === 200) {
+        alert("Lead updated successfully!");
+        setIsEditing(false);
+
+        // Update the lead in the parent component
+        onLeadUpdate({ ...formData, id: lead.id });
+      } else {
+        throw new Error(`Server responded with status: ${response.status}`);
       }
-    });
-    
-    console.log("Update response:", response.data);
-    
-    // Check if the response was successful
-    if (response.status === 200) {
-      alert("Lead updated successfully!");
-      setIsEditing(false);
-      
-      // Update the lead in the parent component
-      onLeadUpdate({ ...formData, id: lead.id });
-    } else {
-      throw new Error(`Server responded with status: ${response.status}`);
+    } catch (error) {
+      console.error("Error updating lead:", error);
+
+      // More detailed error information
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error("Error response data:", error.response.data);
+        console.error("Error response status:", error.response.status);
+        console.error("Error response headers:", error.response.headers);
+        alert(`Failed to update lead: ${error.response.data.message || 'Server error'}`);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error("Error request:", error.request);
+        alert("Failed to update lead: No response received from server");
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Error message:", error.message);
+        alert(`Failed to update lead: ${error.message}`);
+      }
     }
-  } catch (error) {
-    console.error("Error updating lead:", error);
-    
-    // More detailed error information
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      console.error("Error response data:", error.response.data);
-      console.error("Error response status:", error.response.status);
-      console.error("Error response headers:", error.response.headers);
-      alert(`Failed to update lead: ${error.response.data.message || 'Server error'}`);
-    } else if (error.request) {
-      // The request was made but no response was received
-      console.error("Error request:", error.request);
-      alert("Failed to update lead: No response received from server");
-    } else {
-      // Something happened in setting up the request that triggered an Error
-      console.error("Error message:", error.message);
-      alert(`Failed to update lead: ${error.message}`);
-    }
-  }
-};
+  };
 
   const fields = [
     { label: "Name", name: "name_of_lead" },
@@ -161,7 +159,7 @@ const LeadsManagement = () => {
   // Add dropdown state
   const [isAddingSource, setIsAddingSource] = useState(false);
   const [newSourceInput, setNewSourceInput] = useState("");
-  
+
   // Add notification state
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
@@ -177,7 +175,7 @@ const LeadsManagement = () => {
     "Webinar",
     "Ringing"
   ];
- 
+
   // Lead source options 
   const leadSourceOptions = [
     "Website",
@@ -187,10 +185,10 @@ const LeadsManagement = () => {
   ];
 
   const leadUpdateStatusOptions = [
-    "Updated", 
+    "Updated",
     "Not Updated"
   ];
-  
+
   const [newSource, setNewSource] = useState("");
   const [customSources, setCustomSources] = useState([]);
 
@@ -209,11 +207,11 @@ const LeadsManagement = () => {
       try {
         setConnectionStatus("Checking...");
         const response = await fetch(`${API_URL}/test-connection`);
-        
+
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        
+
         const data = await response.json();
         setConnectionStatus(data.connected ? "Connected" : "Failed to connect");
       } catch (error) {
@@ -250,19 +248,19 @@ const LeadsManagement = () => {
       setIsLoading(true);
       try {
         const params = new URLSearchParams();
-        
+
         // Always apply filters if they exist, regardless of tab
         if (searchQuery) params.append("search", searchQuery);
         if (locationQuery) params.append("location", locationQuery);
         if (leadTypeFilter) params.append("leadType", leadTypeFilter);
         if (leadSourceFilter) params.append("source", leadSourceFilter);
         if (leadUpdateStatusFilter) params.append("leadsUpdateStatus", leadUpdateStatusFilter);
-        
+
         console.log("Filter params:", Object.fromEntries(params));
-        
+
         const url = `${API_URL}/leads?${params.toString()}`;
         console.log("Fetching from URL:", url);
-        
+
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
@@ -288,11 +286,11 @@ const LeadsManagement = () => {
       try {
         const countUrl = `${API_URL}/leads/count`;
         const allCountResponse = await fetch(countUrl);
-        
+
         if (!allCountResponse.ok) {
           throw new Error(`HTTP error! Status: ${allCountResponse.status}`);
         }
-        
+
         const allCountData = await allCountResponse.json();
         setLeadCount(allCountData.count);
 
@@ -335,7 +333,7 @@ const LeadsManagement = () => {
       alert(`New source "${newSource}" added!`);
     }
   };
-  
+
   // New function to add source from dropdown
   const handleAddSourceFromDropdown = () => {
     if (newSourceInput && !customSources.includes(newSourceInput) && !leadSourceOptions.includes(newSourceInput)) {
@@ -348,7 +346,7 @@ const LeadsManagement = () => {
       setIsAddingSource(false);
     }
   };
-  
+
   // Handle keypress event for the new source input
   const handleNewSourceKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -365,17 +363,17 @@ const LeadsManagement = () => {
     setLeadUpdateStatusFilter("");
     setActiveTab("all");
   };
-  
+
   // Navigate to Filter page
   const openFilterPage = () => {
     setActivePage("filter");
   };
-  
+
   // Navigate to Data Cleaning page
   const openDataCleaningPage = () => {
     setActivePage("data-cleaning");
   };
-  
+
   // Navigate back to Leads Management
   const backToLeads = () => {
     setActivePage("leads-management");
@@ -392,7 +390,7 @@ const LeadsManagement = () => {
     setShowLeadCard(false);
     setSelectedLead(null);
   };
-  
+
   const handleEditClick = (lead) => {
     setSelectedLead(lead);
     setEditFormData(lead);
@@ -451,7 +449,7 @@ const LeadsManagement = () => {
             <th>Contact</th>
             <th>Location</th>
             <th>Status</th>
-            <th>Update Status</th>  
+            <th>Update Status</th>
             <th>Revenue</th>
             <th>Source</th>
             <th>Frenchise Developer's Name</th>
@@ -482,17 +480,17 @@ const LeadsManagement = () => {
                 <td>${lead.revenue_amount ? Number(lead.revenue_amount).toFixed(2) : '0.00'}</td>
 
                 <td>{lead.source}</td>
-                
+
                 <td>{lead.franchise_developer_name}</td>
                 <td>
                   <div className="action-buttons">
-                    <button 
+                    <button
                       className="view-btn"
                       onClick={() => handleViewLead(lead)}
                     >
                       <i className="fas fa-eye"></i> View
                     </button>
-                   
+
                   </div>
                 </td>
               </tr>
@@ -511,7 +509,7 @@ const LeadsManagement = () => {
   if (activePage === "filter") {
     return <Filter onBack={backToLeads} />;
   }
-  
+
   if (activePage === "data-cleaning") {
     return <DataCleaning onBack={backToLeads} />;
   }
@@ -530,13 +528,13 @@ const LeadsManagement = () => {
 
       {/* Lead Card Popup */}
       {showLeadCard && selectedLead && (
-        <LeadCard 
-          lead={selectedLead} 
-          onClose={handleCloseLeadCard} 
+        <LeadCard
+          lead={selectedLead}
+          onClose={handleCloseLeadCard}
           onLeadUpdate={handleLeadUpdate}
         />
       )}
-      
+
       <div className="page-header">
         <div className="breadcrumb">
           <span className="active">Lead Management</span>
@@ -616,7 +614,7 @@ const LeadsManagement = () => {
               ))}
               <option value="add-new">+ Add New Source</option>
             </select>
-            
+
             {/* New Source Input Form */}
             {isAddingSource && (
               <div className="add-source-dropdown">
@@ -629,13 +627,13 @@ const LeadsManagement = () => {
                   autoFocus
                 />
                 <div className="add-source-actions">
-                  <button 
+                  <button
                     className="add-btn"
                     onClick={handleAddSourceFromDropdown}
                   >
                     Add
                   </button>
-                  <button 
+                  <button
                     className="cancel-btn"
                     onClick={() => setIsAddingSource(false)}
                   >

@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 import './Sidebar.css';
 
@@ -24,7 +22,10 @@ const Sidebar = ({ activePage, setActivePage, setActiveTab }) => {
     };
 
     return (
-        <aside className={`sidebar ${expanded ? 'expanded' : 'collapsed'}`}>
+        <aside className={`sidebar ${expanded ? '' : 'collapsed'}`}>
+            <button className="sidebar-toggle" onClick={toggleSidebar}>
+                <i className={`fas ${expanded ? 'fa-arrow-left' : 'fa-arrow-right'}`}></i>
+            </button>
             <nav className="sidebar-nav">
                 <div className="nav-item franchise-item">
                     <button
@@ -34,13 +35,13 @@ const Sidebar = ({ activePage, setActivePage, setActiveTab }) => {
                         <i className="fas fa-building"></i>
                         <span>Franchise Leads Management</span>
                         <i
-                            className={`fas ${franchiseExpanded ? 'fa-minus' : 'fa-plus'} `}
+                            className={`fas ${franchiseExpanded ? 'fa-minus' : 'fa-plus'} toggle-icon`}
                             onClick={toggleFranchise}
                         ></i>
                     </button>
 
                     {franchiseExpanded && (
-                        <>
+                        <div className="sub-menu">
                             <div className="nav-item">
                                 <button
                                     className={`nav-button ${activePage === 'dashboard' ? 'active' : ''}`}
@@ -86,7 +87,7 @@ const Sidebar = ({ activePage, setActivePage, setActiveTab }) => {
                                     <span>Reports & Analytics</span>
                                 </button>
                             </div>
-                        </>
+                        </div>
                     )}
                 </div>
             </nav>

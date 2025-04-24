@@ -14,5 +14,9 @@ export const BulkVerificationSchema = z.object({
         duplicate: z.boolean(),
         data: z.boolean(),
     }),
-    leads: z.array(leadSchema).nonempty(),
+    leads: z.array(LeadSchema).nonempty(),
+});
+
+export const emailSchema = z.object({
+    email: z.string().email('Invalid email format'),
 });

@@ -1,12 +1,26 @@
+import cors from 'cors';
 import 'dotenv/config';
 import express from 'express';
 import setupSwagger from '../config/swagger.js';
 import { errorHandler } from '../middlewares/errors.js';
 import routes from '../routes/index.js';
 
+const whitelist = ['http://localhost:5173', 'https://frontend-domain.com'];
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || whitelist.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+};
+
 const startServer = () => {
     const app = express();
 
+    app.use(cors(corsOptions));
     app.use(express.json());
 
     setupSwagger(app);

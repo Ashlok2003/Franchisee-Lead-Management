@@ -44,3 +44,28 @@ export const scheduleMessages = async ({ name, type, subject, body, scheduled_da
         connection.release();
     }
 };
+
+export const logMessage = async ({ promotionId, leadId, type, content, status, sentAt }) => {
+    const connection = await db.getConnection();
+    try {
+        await connection.beginTransaction();
+        await connection.query(
+            'INSERT INTO messages (promotion_id, lead_id, type, content, status, sent_at) VALUES (?, ?, ?, ?, ?, ?)',
+            [promotionId, leadId, type, content, status, sentAt]
+        );
+        await connection.commit();
+    } catch (error) {
+        await connection.rollback();
+        throw error;
+    } finally {
+        connection.release();
+    }
+};
+
+export const getPromotionStatus = async (promotionId) => {
+    const [rows] = await pool.execute(
+        'SELECT status, COUNT(*) as count FROM messages WHERE promotion_id = ? GROUP BY status',
+        [promotionId]
+    );
+    return rows;
+};

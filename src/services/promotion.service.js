@@ -1,11 +1,18 @@
+import handlebars from 'handlebars';
 import db from '../config/database.js';
+import { getAttachmentsForPromotion } from '../repository/attachment.repo.js';
+import { logMessage } from '../repository/message.repo.js';
 import {
     addLeadToPromotion,
     createPromotion,
     findAllPromotions,
     findPromotionById,
+    getLeadsForPromotion,
     getPromotionDetails,
+    updateLeadStatus,
+    updatePromotionStatus,
 } from '../repository/promotion.repo.js';
+import { sendEmail } from '../utils/mailer.js';
 
 export const getAllPromotionsService = async (filters) => findAllPromotions(filters);
 
@@ -45,4 +52,41 @@ export const addLeadsToPromotionService = async (promotion_id, lead_ids) => {
     } finally {
         connection.release();
     }
+};
+
+export const sendPromotion = async (promotionId) => {
+    const promotion = await getPromotionByIdService(promotionId);
+
+    if (!promotion) throw new Error('Promotion not found');
+    if (promotion.type !== 'Email') throw new Error('Promotion type must be Email');
+
+    const leads = await getLeadsForPromotion(promotionId);
+    const attachments = await getAttachmentsForPromotion(promotionId);
+
+    const emailAttachments = attachments.map((att) => ({
+        filename: att.file_name,
+        path: att.file_path,
+    }));
+
+    for (const lead of leads) {
+        try {
+            const context = lead;
+
+            const compiledSubject = handlebars.compile(promotion.subject)(context);
+            const compiledBody = handlebars.compile(promotion.body)(context);
+
+            await sendEmail(lead.email_id, compiledSubject, compiledBody, emailAttachments);
+
+            const sentAt = new Date();
+            await logMessage(promotionId, lead.id, 'Email', compiledBody, 'Sent', sentAt);
+            await updateLeadStatus(promotionId, lead.id, 'Sent', sentAt);
+        } catch (error) {
+            console.error(`Failed to send email to ${lead.email_id}:`, error);
+            const sentAt = new Date();
+            await logMessage(promotionId, lead.id, 'Email', '', 'Failed', sentAt);
+            await updateLeadStatus(promotionId, lead.id, 'Failed', sentAt);
+        }
+    }
+
+    await updatePromotionStatus(promotionId, 'Completed');
 };

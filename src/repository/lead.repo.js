@@ -1,10 +1,13 @@
 import db from '../config/database.js';
 
-export const queryDatabase = async (sql, query) => {
+export const queryDatabase = async (sql, params) => {
     try {
-        const [results] = await db.query(sql, query);
-        return results;
+        const result = await db.query(sql, params);
+        return result;
     } catch (err) {
+        console.error('Error executing query:', err);
+        console.log('SQL:', sql);
+        console.log('Params:', params);
         throw new Error('Database query failed');
     }
 };
@@ -98,3 +101,31 @@ export const searchLeads = async (query) => {
     );
     return rows;
 };
+
+export const getFilePath = async (id) => {
+    const [result] = await db.query('SELECT file_path FROM upload_history WHERE id = ?', [id]);
+    return result?.file_path;
+};
+
+export const saveUploadHistory = async (fileName, filePath, metadata) => {
+    return await db.query(
+        'INSERT INTO upload_history (file_name, file_path, metadata) VALUES (?, ?, ?)',
+        [fileName, filePath, JSON.stringify(metadata)]
+    );
+};
+
+export const getUploadHistory = async () => {
+    const [rows] = await db.query(`
+        SELECT 
+            uh.id AS upload_id,
+            uh.file_name,
+            uh.upload_time,
+            uh.metadata,
+            GROUP_CONCAT(DISTINCT ld.leadType) AS leadTypes
+        FROM upload_history uh
+        LEFT JOIN leads_database ld ON ld.file_id = uh.id
+        GROUP BY uh.id
+    `);
+    return rows;
+};
+

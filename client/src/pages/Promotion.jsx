@@ -3,8 +3,6 @@ import "./Promotion.css";
 import { Search, Filter, Check, Edit, X, Plus, Calendar, Clock, Upload, Save, Phone, MessageSquare, Mail, Mic, AlertCircle } from "lucide-react";
 import axios from 'axios';
 
-
-
 const Promotion = ({ setActivePage }) => {
   const [activeTab, setActiveTab] = useState("Active Promotions");
   const [selectedAction, setSelectedAction] = useState("WhatsApp Business");

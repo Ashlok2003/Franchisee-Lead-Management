@@ -1,16 +1,20 @@
 import { Router } from 'express';
 import {
-    addLeadsToPromotionService,
-    createPromotionService,
-    getAllPromotionsService,
-    getPromotionByIdService,
-} from '../services/promotion.service.js';
+    addLeadsToPromotionController,
+    createPromotionController,
+    getPromotionByIdController,
+    getPromotionStatusController,
+    getPromotionsController,
+    sendPromotionNowController,
+} from '../controllers/promotion.controller.js';
 
 const router = Router();
 
-router.get('/', getAllPromotionsService);
-router.get('/:id', getPromotionByIdService);
-router.post('/', createPromotionService);
-router.post('/:id/leads', addLeadsToPromotionService);
+router.get('/', getPromotionsController);
+router.get('/:id', getPromotionByIdController);
+router.post('/', createPromotionController);
+router.post('/:id/leads', addLeadsToPromotionController);
+router.post('/send/:id', sendPromotionNowController);
+router.post('/status/:id', getPromotionStatusController);
 
 export default router;

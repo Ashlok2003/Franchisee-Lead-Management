@@ -1,0 +1,76 @@
+/* Light Theme */
+[data-theme='light'] {
+    --primary-color: #333;
+    --secondary-color: #666;
+    --background-color: rgba(255, 255, 255, 0.9);
+    --dropdown-background: #fff;
+    --dropdown-hover: #f5f5f5;
+    --shadow-color: rgba(0, 0, 0, 0.05);
+    --danger-color: #dc2626;
+    --danger-hover: #fee2e2;
+    --avatar-background: #e0e0e0;
+    --avatar-hover: #d1d1d1;
+}
+
+/* Dark Theme */
+[data-theme='dark'] {
+    --primary-color: #e0e0e0;
+    --secondary-color: #a0a0a0;
+    --background-color: rgba(30, 30, 30, 0.9);
+    --dropdown-background: #2a2a2a;
+    --dropdown-hover: #3a3a3a;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --danger-color: #f87171;
+    --danger-hover: #7f1d1d;
+    --avatar-background: #4a4a4a;
+    --avatar-hover: #5a5a5a;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--secondary-color);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    color: var(--primary-color);
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+    overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--nav-active-bg);
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}

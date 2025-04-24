@@ -321,6 +321,35 @@ paths:
             description: Missing required fields
           "500":
             description: Failed to upload attachment
+  /email/verify:
+    post:
+      summary: Verify if an email domain is disposable or invalid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required: ["email"]
+      responses:
+        "200":
+          description: Email verification result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  is_valid:
+                    type: boolean
+                  is_disposable:
+                    type: boolean
+        "400":
+          description: Invalid email format
+        "500":
+          description: Failed to verify email
   /verifications/email:
     post:
       summary: Save email verification

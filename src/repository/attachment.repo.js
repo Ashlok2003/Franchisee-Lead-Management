@@ -22,4 +22,11 @@ export const createAttachment = async ({
         uploaded_at: new Date(),
     };
 };
-// github
+
+export const getAttachmentsForPromotion = async (promotionId) => {
+    const [rows] = await pool.execute(
+        'SELECT file_name, file_path FROM attachments WHERE promotion_id = ?',
+        [promotionId]
+    );
+    return rows;
+};

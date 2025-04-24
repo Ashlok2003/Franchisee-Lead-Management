@@ -26,12 +26,18 @@
     justify-content: center;
     cursor: pointer;
     color: #7e3b9c;
+    border: none;
     z-index: 10;
+    transition: transform 0.2s;
+}
+
+.sidebar-toggle:hover {
+    transform: scale(1.1);
 }
 
 .sidebar-nav {
     padding: 16px 0;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .nav-item {
@@ -50,17 +56,20 @@
     font-size: 14px;
     color: #333;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition:
+        background-color 0.2s,
+        color 0.2s;
     position: relative;
 }
 
 .nav-button:hover {
     background-color: #f5f5f7;
+    color: #000;
 }
 
 .nav-button.active {
     background-color: #f0e6f5;
-    color: var(--primary-color);
+    color: #7e3b9c;
     font-weight: 500;
 }
 
@@ -77,6 +86,11 @@
     transform: translateY(-50%);
     font-size: 12px;
     color: #666;
+    transition: color 0.2s;
+}
+
+.toggle-icon:hover {
+    color: #333;
 }
 
 .franchise-item {
@@ -88,24 +102,12 @@
     background-color: #f9f5fc;
 }
 
-.sub-menu-item {
-    display: flex;
-    align-items: center;
-    width: 100%;
+.sub-menu .nav-button {
     padding: 10px 16px;
-    background: none;
-    border: none;
-    text-align: left;
     font-size: 13px;
-    color: #333;
-    cursor: pointer;
 }
 
-.sub-menu-item:hover {
-    background-color: #f0e6f5;
-}
-
-.sub-menu-item i {
+.sub-menu .nav-button i {
     margin-right: 8px;
     font-size: 10px;
 }
@@ -126,4 +128,21 @@
 
 .collapsed .sub-menu {
     display: none;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 180px;
+    }
+    .sidebar.collapsed {
+        width: 50px;
+    }
+    .nav-button {
+        font-size: 13px;
+        padding: 10px 12px;
+    }
+    .sub-menu .nav-button {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
 }
