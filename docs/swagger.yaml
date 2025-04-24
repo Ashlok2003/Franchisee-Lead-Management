@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Lead Management API
-  description: API for managing leads, templates, promotions, messages, attachments, and email verifications
+  description: API for managing leads, templates, promotions, messages, attachments, email verifications, and SMS OTPs
   version: 1.0.0
 servers:
   - url: https://franchisee-lead-management-server.onrender.com/api
@@ -300,27 +300,27 @@ paths:
           description: Missing required fields
         "500":
           description: Failed to schedule messages
-    /attachments:
-      post:
-        summary: Upload an attachment
-        consumes:
-          - multipart/form-data
-        parameters:
-          - in: formData
-            name: file
-            type: file
-            description: The file to upload
-          - in: formData
-            name: promotion_id
-            type: integer
-            description: ID of the associated promotion
-        responses:
-          "201":
-            description: Attachment uploaded
-          "400":
-            description: Missing required fields
-          "500":
-            description: Failed to upload attachment
+  /attachments:
+    post:
+      summary: Upload an attachment
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          description: The file to upload
+        - in: formData
+          name: promotion_id
+          type: integer
+          description: ID of the associated promotion
+      responses:
+        "201":
+          description: Attachment uploaded
+        "400":
+          description: Missing required fields
+        "500":
+          description: Failed to upload attachment
   /email/verify:
     post:
       summary: Verify if an email domain is disposable or invalid
@@ -378,6 +378,30 @@ paths:
           description: Missing required fields
         "500":
           description: Failed to save email verification
+  /sms/send-otp:
+    post:
+      summary: Send OTP via SMS
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendOtpInput"
+      responses:
+        "200":
+          description: OTP sent successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: OTP sent successfully
+        "400":
+          description: Missing required fields
+        "500":
+          description: Failed to send OTP
 components:
   schemas:
     Lead:
@@ -512,3 +536,10 @@ components:
                 type: string
               file_size:
                 type: integer
+    SendOtpInput:
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+          description: The phone number to send the OTP to (in international format, e.g., +1234567890)
+      required: ["phoneNumber"]

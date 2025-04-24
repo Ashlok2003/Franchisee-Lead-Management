@@ -1,25 +1,37 @@
 import cors from 'cors';
+import 'dotenv/config';
 import express from 'express';
+import setupSwagger from '../config/swagger.js';
 import { errorHandler } from '../middlewares/errors.js';
 import routes from '../routes/index.js';
 
-const app = express();
+const whitelist = ['http://localhost:5173', 'https://frontend-domain.com'];
 
 const corsOptions = {
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
+    origin: function (origin, callback) {
+        if (!origin || whitelist.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
 };
 
-app.use(cors(corsOptions));
-app.use(errorHandler);
-app.get('/api', routes);
-
 const startServer = () => {
-    const port = process.env.PORT || 3000;
-    app.listen(port, () => {
-        console.log(`Server running at http://localhost:${port}`);
+    const app = express();
+
+    app.use(cors(corsOptions));
+    app.use(express.json());
+
+    setupSwagger(app);
+
+    app.use('/api', routes);
+    app.use(errorHandler);
+
+    const PORT = process.env.PORT || 5000;
+    console.log('Server is starting....\n');
+    app.listen(PORT, () => {
+        console.log(`Worker ${process.pid} started on port ${PORT}`);
     });
 };
 
